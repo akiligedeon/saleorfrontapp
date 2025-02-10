@@ -11,7 +11,8 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 
 	return (
 		<>
-			<NavLink href="/products">All</NavLink>
+			<NavLink href="/products">All Categories</NavLink>
+
 			{navLinks.menu?.items?.map((item) => {
 				if (item.category) {
 					return (
