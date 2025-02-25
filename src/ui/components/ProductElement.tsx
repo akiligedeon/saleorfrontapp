@@ -18,9 +18,9 @@ export function ProductElement({
 							loading={loading}
 							src={product.thumbnail.url}
 							alt={product.thumbnail.alt ?? ""}
-							width={512}
-							height={512}
-							sizes={"512px"}
+							width={212}
+							height={212}
+							sizes={"212px"}
 							priority={priority}
 						/>
 					)}
@@ -30,13 +30,13 @@ export function ProductElement({
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{product.category?.name}
 							</p>
+							<h1 className="font-bolder mt-2" data-testid="ProductElement_PriceRange">
+								{formatMoneyRange({
+									start: product?.pricing?.priceRange?.start?.gross,
+									stop: product?.pricing?.priceRange?.stop?.gross,
+								})}
+							</h1>
 						</div>
-						<p className="mt-1 text-sm font-medium text-neutral-900" data-testid="ProductElement_PriceRange">
-							{formatMoneyRange({
-								start: product?.pricing?.priceRange?.start?.gross,
-								stop: product?.pricing?.priceRange?.stop?.gross,
-							})}
-						</p>
 					</div>
 				</div>
 			</LinkWithChannel>

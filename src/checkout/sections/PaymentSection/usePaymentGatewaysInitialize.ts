@@ -37,7 +37,9 @@ export const usePaymentGatewaysInitialize = () => {
 				}),
 				onSuccess: ({ data }) => {
 					const parsedConfigs = (data.gatewayConfigs || []) as ParsedPaymentGateways;
+					//alert(JSON.stringify(data.gatewayConfigs));
 
+					console.log("DATA RESPONSE : " + JSON.stringify(data));
 					if (!parsedConfigs.length) {
 						throw new Error("No available payment gateways");
 					}

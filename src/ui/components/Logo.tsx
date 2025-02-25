@@ -1,10 +1,11 @@
 "use client";
-
-import { usePathname } from "next/navigation";
+//import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { LinkWithChannel } from "../atoms/LinkWithChannel";
+import { NavLink } from "./nav/components/NavLink";
 
-import logo from "@/assets/images/gltzlogo.png";
+import logo from "@/assets/images/gltz.png";
 
 const companyName = "GLTZ";
 
@@ -21,8 +22,14 @@ export const Logo = () => {
 
 	return (
 		<div className="flex items-center font-bold">
-			<LinkWithChannel aria-label="homepage" href="/">
-				<Image src={logo} alt="Your Store Name" width={40} height={40} />
+			<LinkWithChannel
+				aria-label="homepage"
+				href="/"
+				className="no-underline focus:no-underline active:no-underline"
+			>
+				<NavLink href="/">
+					<Image src={logo} alt="Your Store Name" width={60} height={60} />
+				</NavLink>
 			</LinkWithChannel>
 		</div>
 	);

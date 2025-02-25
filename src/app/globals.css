@@ -4,4 +4,8 @@
 
 body {
 	overflow-x: hidden;
+	background: #f8f3e9 !important;
+}
+#mobile-menu {
+	background: #f8f3e9;
 }

@@ -1,0 +1,22 @@
+/* src/components/HeroSection.module.css */
+.heroSection {
+    background-size: cover;
+    background-position: center;
+    padding: 50px 20px;
+    color: white;
+    text-align: center;
+  }
+  .productGrid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .productItem {
+    width: 200px;
+    text-align: center;
+  }
+  .productImage {
+    width: 100%;
+    height: auto;
+  }
+  

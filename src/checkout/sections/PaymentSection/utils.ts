@@ -1,5 +1,5 @@
 import { compact } from "lodash-es";
-import { adyenGatewayId } from "./AdyenDropIn/types";
+//import { adyenGatewayId } from "./AdyenDropIn/types";
 import { stripeGatewayId } from "./StripeElements/types";
 import {
 	type CheckoutAuthorizeStatusEnum,
@@ -12,7 +12,8 @@ import { type MightNotExist } from "@/checkout/lib/globalTypes";
 import { getUrl } from "@/checkout/lib/utils/url";
 import { type PaymentStatus } from "@/checkout/sections/PaymentSection/types";
 
-export const supportedPaymentGateways = [adyenGatewayId, stripeGatewayId] as const;
+//export const supportedPaymentGateways = [adyenGatewayId, stripeGatewayId] as const;
+export const supportedPaymentGateways = [stripeGatewayId] as const;
 
 export const getFilteredPaymentGateways = (
 	paymentGateways: MightNotExist<PaymentGateway[]>,
@@ -25,16 +26,26 @@ export const getFilteredPaymentGateways = (
 	return compact(paymentGateways).filter(({ id, name }) => {
 		const shouldBeIncluded = supportedPaymentGateways.includes(id);
 		const isAPlugin = !id.startsWith("app.");
-
+		console.log("GATEWAYS : " + JSON.stringify(paymentGateways));
 		// app is missing in our codebase but is an app and not a plugin
 		// hence we'd like to have it handled by default
 		if (!shouldBeIncluded && !isAPlugin) {
 			console.warn(`Unhandled payment gateway - name: ${name}, id: ${id}`);
 			return false;
 		}
-
+		console.log("GATEWAYS FILTERED : " + JSON.stringify(paymentGateways));
 		return shouldBeIncluded;
 	});
+
+	/*return compact(paymentGateways).filter(({ id, name }) => {
+		const shouldBeIncluded = supportedPaymentGateways.includes(id);
+		//alert(JSON.stringify(paymentGateways));
+		if (!shouldBeIncluded) {
+			//alert(`Unhandled payment gateway - name: ${name}, id: ${id}`);
+		}
+
+		return shouldBeIncluded;
+	});*/
 };
 
 export const getUrlForTransactionInitialize = () => getUrl({ query: { processingPayment: true } });
