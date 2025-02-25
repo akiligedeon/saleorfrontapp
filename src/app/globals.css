@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	font-size: 85%; /* Scales the page to 90% of its original size */
+}
 body {
 	overflow-x: hidden;
 	background: #f8f3e9 !important;
+	zoom: 0;
 }
 #mobile-menu {
 	background: #f8f3e9;

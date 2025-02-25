@@ -96,7 +96,10 @@ export async function Footer({ channel }: { channel: string }) {
 						</h1>
 					</div>
 					<div className="mt-6 flex flex-shrink-0 flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:ml-4 lg:mt-0 lg:justify-end">
-						<button className="inline-flex items-center rounded-lg bg-gray-600 px-6 py-3 text-gray-50">
+						<a
+							href="https://play.google.com/store/apps/details?id=com.todarke.gltz"
+							className="inline-flex items-center rounded-lg bg-gray-600 px-6 py-3 text-gray-50"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -108,8 +111,11 @@ export async function Footer({ channel }: { channel: string }) {
 								<span className="mb-1 text-xs">GET IT ON</span>
 								<span className="title-font font-semibold">Google Play</span>
 							</span>
-						</button>
-						<button className="inline-flex items-center rounded-lg bg-gray-600 px-5 py-3 text-gray-50">
+						</a>
+						<a
+							href="https://apps.apple.com/us/app/gltz/id6738639078"
+							className="inline-flex items-center rounded-lg bg-gray-600 px-5 py-3 text-gray-50"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 50 50"
@@ -121,7 +127,7 @@ export async function Footer({ channel }: { channel: string }) {
 								<span className="mb-1 text-xs">Download on the</span>
 								<span className="title-font font-semibold">App Store</span>
 							</span>
-						</button>
+						</a>
 					</div>
 				</div>
 			</section>

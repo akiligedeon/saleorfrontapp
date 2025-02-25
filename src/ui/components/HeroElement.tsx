@@ -31,16 +31,11 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 							</p>
 							<div className="mt-8 flex">
 								<a
-									href="#"
+									href={`/products/${product.slug}`}
+									key={product.id}
 									className="text-md mr-4 rounded-lg border-2 border-transparent bg-black px-4 py-2 uppercase text-white hover:bg-pink-400"
 								>
-									Get started
-								</a>
-								<a
-									href="#"
-									className="text-md border-black-500 text-black-500 rounded-lg border-2 bg-transparent px-4 py-2 uppercase hover:bg-black hover:text-white dark:text-white"
-								>
-									Read more
+									BUY NOW
 								</a>
 							</div>
 						</div>
