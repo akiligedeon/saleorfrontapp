@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
 						<div className="mt-6 flex items-center justify-center gap-x-6 sm:mt-10">
 							<a
 								className="flex h-[38px] min-w-[130px] flex-row items-center justify-center rounded-full border border-transparent bg-black px-4 px-8 py-1.5 py-6 text-base text-sm font-medium font-medium tracking-wide tracking-wide text-white transition duration-150 ease-in-out disabled:cursor-not-allowed disabled:opacity-50"
-								href=""
+								href="mailto:darkeagent@gmail.com" target="_blank"
 							>
 								Contact us now
 							</a>
