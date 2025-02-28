@@ -9,10 +9,29 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 		revalidate: 60 * 60 * 24,
 	});
 
+	// Define local links
+	const localLinks = [
+		{ id: "local-1", name: "Size Chart", href: "/size" },
+		{ id: "local-2", name: "About Us", href: "/about" },
+		{ id: "local-3", name: "Care", href: "/care" },
+	];
+
+	// Merge dynamic Saleor links with local links
+	const combinedLinks = [...localLinks, ...(navLinks.menu?.items || [])];
+
 	return (
 		<>
-			
-			{navLinks.menu?.items?.map((item) => {
+			{combinedLinks.map((item) => {
+				if ("href" in item) {
+					// Local link case
+					return (
+						<NavLink key={item.id} href={item.href}>
+							{item.name}
+						</NavLink>
+					);
+				}
+
+				// Saleor dynamic links
 				if (item.category) {
 					return (
 						<NavLink key={item.id} href={`/categories/${item.category.slug}`}>

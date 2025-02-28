@@ -15,7 +15,7 @@ interface HeroElementProps {
  */
 export function HeroElement({ product, loading, priority }: HeroElementProps) {
 	return (
-		<li data-testid="ProductElement" className="relative flex flex-col overflow-hidden rounded-md transition">
+		<li  data-testid="ProductElement" className="relative flex flex-col overflow-hidden rounded-md transition">
 			<LinkWithChannel href={`/products/${product.slug}`} key={product.id}>
 				<div className="relative z-0 flex items-center overflow-hidden">
 					<div className="container relative mx-auto flex px-6 py-16">
@@ -23,7 +23,12 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 							<span className="mb-12 h-2 w-20 bg-gray-800 dark:bg-black"></span>
 							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-8xl dark:text-black">
 								{product.name}
-								<span className="text-2xl sm:text-7xl">{product.category?.name}</span>
+								<span className="text-2xl sm:text-7xl">
+                                {formatMoneyRange({
+												start: product?.pricing?.priceRange?.start?.gross,
+												stop: product?.pricing?.priceRange?.stop?.gross,
+											})}
+                                </span>
 							</h1>
 							<p className="text-sm text-gray-700 sm:text-base dark:text-black">
 								Dimension of reality that makes change possible and understandable. An indefinite and

@@ -1,37 +1,28 @@
 import React from "react";
+import { Carousel } from "flowbite-react";
 import { HeroElement } from "./HeroElement";
 import type { ProductListItemFragment } from "@/gql/graphql";
 
 interface HeroListProps {
-	products: readonly ProductListItemFragment[];
+  products: readonly ProductListItemFragment[];
 }
 
 /**
- * Renders a responsive grid of products (the "hero" section).
+ * Renders a carousel of products (the "hero" section).
  */
 export const HeroList: React.FC<HeroListProps> = ({ products }) => {
-	return (
-		<ul
-			className="
-        mx-auto 
-        grid 
-        max-w-7xl 
-        grid-cols-1 
-        gap-6 
-        p-4 
-        sm:grid-cols-2 
-        lg:grid-cols-1 
-        xl:grid-cols-1
-      "
-		>
-			{products.map((product, index) => (
-				<HeroElement
-					key={product.id}
-					product={product}
-					priority={index < 2}
-					loading={index < 3 ? "eager" : "lazy"}
-				/>
-			))}
-		</ul>
-	);
+  return (
+    <div className="max-w-7xl mx-auto p-4">
+      <Carousel>
+        {products.map((product, index) => (
+          <HeroElement
+            key={product.id}
+            product={product}
+            priority={index < 2}
+            loading={index < 3 ? "eager" : "lazy"}
+          />
+        ))}
+      </Carousel>
+    </div>
+  );
 };
