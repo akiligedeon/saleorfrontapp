@@ -17,7 +17,7 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 	];
 
 	// Merge dynamic Saleor links with local links
-	const combinedLinks = [...localLinks, ...(navLinks.menu?.items || [])];
+	const combinedLinks = [...(navLinks.menu?.items || []),...localLinks];
 
 	return (
 		<>

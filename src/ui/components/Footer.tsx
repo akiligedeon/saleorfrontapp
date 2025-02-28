@@ -14,10 +14,10 @@ export async function Footer({ channel }: { channel: string }) {
 	});
 	const channels = process.env.SALEOR_APP_TOKEN
 		? await executeGraphQL(ChannelsListDocument, {
-				withAuth: false, // disable cookie-based auth for this call
+				withAuth: true, // disable cookie-based auth for this call
 				headers: {
 					// and use app token instead
-					Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
+					// Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
 				},
 			})
 		: null;
@@ -36,7 +36,7 @@ export async function Footer({ channel }: { channel: string }) {
 										return (
 											<li key={child.id}>
 												<LinkWithChannel
-													className="text-gray-500 hover:underline"
+													className="text-white hover:underline"
 													href={`/categories/${child.category.slug}`}
 												>
 													{child.category.name}
@@ -48,7 +48,7 @@ export async function Footer({ channel }: { channel: string }) {
 										return (
 											<li key={child.id}>
 												<LinkWithChannel
-													className="text-gray-500 hover:underline"
+													className="text-white hover:underline"
 													href={`/collections/${child.collection.slug}`}
 												>
 													{child.collection.name}
@@ -60,7 +60,7 @@ export async function Footer({ channel }: { channel: string }) {
 										return (
 											<li key={child.id}>
 												<LinkWithChannel
-													className="text-gray-500 hover:underline"
+													className="text-white hover:underline"
 													href={`/pages/${child.page.slug}`}
 												>
 													{child.page.title}
@@ -71,7 +71,7 @@ export async function Footer({ channel }: { channel: string }) {
 									if (child.url) {
 										return (
 											<li key={child.id}>
-												<LinkWithChannel className="text-gray-500 hover:underline" href={child.url}>
+												<LinkWithChannel className="text-white hover:underline" href={child.url}>
 													{child.name}
 												</LinkWithChannel>
 											</li>
@@ -87,7 +87,7 @@ export async function Footer({ channel }: { channel: string }) {
 			<section className="py-6 text-gray-900">
 				<div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
 					<div className="flex flex-col justify-center lg:text-left">
-						<p className="mb-1 text-sm font-medium uppercase tracking-widest text-gray-600">
+						<p className="mb-1 text-sm font-medium uppercase tracking-widest text-white">
 							Discover exquisite jewelry with our premium online storefront. Experience seamless shopping with
 							our elegant, high-performance platform, designed for luxury brands in the Middle East.
 						</p>
@@ -143,6 +143,13 @@ export async function Footer({ channel }: { channel: string }) {
 			<div className="mb-8 mt-8 border-t border-gray-700 pt-6 text-center">
 				<p className="text-sm text-gray-400">Copyright &copy; {currentYear} Gltz.</p>
 				<p className="text-sm text-gray-400">Powered by Seijelli LLC</p>
+				{channels?.channels && (
+					<div className="mb-4 text-white">
+						<label>
+							<span className="text-sm">Change currency:</span> <ChannelSelect channels={channels.channels} />
+						</label>
+					</div>
+				)}
 			</div>
 		</footer>
 		/*
@@ -206,13 +213,7 @@ export async function Footer({ channel }: { channel: string }) {
 					})}
 				</div>
 
-				{channels?.channels && (
-					<div className="mb-4 text-neutral-500">
-						<label>
-							<span className="text-sm">Change currency:</span> <ChannelSelect channels={channels.channels} />
-						</label>
-					</div>
-				)}
+				
 
 				<div className="flex flex-col justify-between border-t border-neutral-200 py-10 sm:flex-row">
 					<p className="text-sm text-neutral-500">Copyright &copy; {currentYear} Gltz.</p>
