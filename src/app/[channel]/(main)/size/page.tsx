@@ -1,4 +1,10 @@
 import React from "react";
+import Image from "next/image";
+
+import Image1 from "@/assets/images/top1.png";
+import Image2 from "@/assets/images/top2.png";
+import Image3 from "@/assets/images/top3.png";
+import Image4 from "@/assets/images/top4.png";
 
 const CareGuide = () => {
 	return (
@@ -7,14 +13,18 @@ const CareGuide = () => {
 
 			<section className="mb-8">
 				<div className="mb-4 flex h-64 w-full items-center justify-center bg-gray-300">
-					<span className="text-gray-600">Image Placeholder</span>
+					<span className="text-gray-600">
+						<Image src={Image1} alt="Your Store Name" />
+					</span>
 				</div>
 				<h2 className="mb-4 text-center text-xl font-semibold text-gray-700">the dos + don’ts</h2>
 			</section>
 
 			<section className="mb-8 flex flex-col items-center gap-6 md:flex-row">
 				<div className="flex h-48 w-48 items-center justify-center bg-gray-300">
-					<span className="text-gray-600">Image</span>
+					<span className="text-gray-600">
+						<Image src={Image2} alt="Your Store Name" />
+					</span>
 				</div>
 				<div>
 					<h3 className="mb-2 text-lg font-semibold text-gray-700">10k & 14k Gold</h3>
@@ -44,13 +54,17 @@ const CareGuide = () => {
 					</ul>
 				</div>
 				<div className="flex h-48 w-48 items-center justify-center bg-gray-300">
-					<span className="text-gray-600">Image</span>
+					<span className="text-gray-600">
+						<Image src={Image3} alt="Your Store Name" />
+					</span>
 				</div>
 			</section>
 
 			<section className="flex flex-col items-center gap-6 md:flex-row">
 				<div className="flex h-48 w-48 items-center justify-center bg-gray-300">
-					<span className="text-gray-600">Image</span>
+					<span className="text-gray-600">
+						<Image src={Image4} alt="Your Store Name" />
+					</span>
 				</div>
 				<div>
 					<h3 className="mb-2 text-lg font-semibold text-gray-700">925 Sterling Silver</h3>

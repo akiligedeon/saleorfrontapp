@@ -1,4 +1,10 @@
 import React from "react";
+import Image from "next/image";
+
+import Image1 from "@/assets/images/top1.png";
+import Image2 from "@/assets/images/top2.png";
+import Image3 from "@/assets/images/top3.png";
+import Image4 from "@/assets/images/top4.png";
 
 const SizingPage = () => {
   return (
@@ -7,7 +13,9 @@ const SizingPage = () => {
       
       {/* Hero Image Placeholder */}
       <div className="w-full h-64 bg-gray-300 flex items-center justify-center mb-6">
-        <span className="text-gray-500">[Hero Image Placeholder]</span>
+        <span className="text-gray-500">
+          <Image src={Image1} alt="Your Store Name" />
+        </span>
       </div>
 
       {/* Ring Sizer Section */}
@@ -23,7 +31,7 @@ const SizingPage = () => {
         
         {/* Ring Image Placeholder */}
         <div className="w-full h-32 bg-gray-300 flex items-center justify-center mb-4">
-          <span className="text-gray-500">[Ring Image Placeholder]</span>
+          <span className="text-gray-500"><Image src={Image2} alt="Your Store Name" /></span>
         </div>
 
         <h3 className="text-lg font-medium text-gray-700">2. Measure your finger</h3>
@@ -36,7 +44,7 @@ const SizingPage = () => {
 
       {/* Ring Size Chart Placeholder */}
       <div className="w-full h-40 bg-gray-300 flex items-center justify-center mb-8">
-        <span className="text-gray-500">[Ring Size Chart Placeholder]</span>
+        <span className="text-gray-500"><Image src={Image3} alt="Your Store Name" /></span>
       </div>
 
       {/* Bracelet Sizer Section */}
@@ -51,7 +59,7 @@ const SizingPage = () => {
         
         {/* Bracelet Image Placeholder */}
         <div className="w-full h-32 bg-gray-300 flex items-center justify-center mb-4">
-          <span className="text-gray-500">[Bracelet Image Placeholder]</span>
+          <span className="text-gray-500"><Image src={Image4} alt="Your Store Name" /></span>
         </div>
 
         <h3 className="text-lg font-medium text-gray-700">2. Measure your wrist</h3>
