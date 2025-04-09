@@ -15,7 +15,7 @@
 	"rules": {
 		// sort imports
 		"import/order": "error",
-
+                "no-unused-vars": "off",
 		// no let exports
 		"import/no-mutable-exports": "error",
 
