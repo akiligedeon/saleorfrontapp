@@ -26,7 +26,7 @@
 
 		"import/no-unresolved": "off",
 		"react/no-unescaped-entities": "off",
-        "@next/next/no-page-custom-font": "off",
+                "@next/next/no-page-custom-font": "off",
 
 		// allow {} even though it's unsafe but comes handy
 		"@typescript-eslint/ban-types": [
