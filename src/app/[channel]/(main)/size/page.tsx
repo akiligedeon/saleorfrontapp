@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-import Image1 from "@/assets/images/top1.png";
-import Image2 from "@/assets/images/top2.png";
-import Image3 from "@/assets/images/top3.png";
-import Image4 from "@/assets/images/top4.png";
+import Image1 from "@/assets/images/top1.jpg";
+import Image2 from "@/assets/images/top2.jpg";
+import Image3 from "@/assets/images/top3.jpg";
+import Image4 from "@/assets/images/top4.jpg";
 
 const CareGuide = () => {
 	return (

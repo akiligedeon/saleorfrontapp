@@ -4,18 +4,19 @@
 	"parserOptions": {
 		"project": "tsconfig.json"
 	},
+
 	"extends": [
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:import/recommended",
 		"plugin:import/typescript",
 		"prettier",
-		"next/core-web-vitals"
+		"next/core-web-vitals",
+		"next"
 	],
 	"rules": {
 		// sort imports
 		"import/order": "error",
-
 		// no let exports
 		"import/no-mutable-exports": "error",
 
@@ -23,6 +24,8 @@
 		"import/no-default-export": "error",
 
 		"import/no-unresolved": "off",
+		"react/no-unescaped-entities": "off",
+		"@next/next/no-page-custom-font": "off",
 
 		// allow {} even though it's unsafe but comes handy
 		"@typescript-eslint/ban-types": [
