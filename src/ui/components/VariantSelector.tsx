@@ -9,14 +9,14 @@ export function VariantSelector({
 	product,
 	selectedVariant,
 	channel,
-	price,
+	//price,
 	goldPrice,
 }: {
 	variants: readonly VariantDetailsFragment[];
 	product: ProductListItemFragment;
 	selectedVariant?: VariantDetailsFragment;
 	channel: string;
-	price: any;
+	//price: any;
 	goldPrice: number | null;
 }) {
 	if (!selectedVariant && variants.length === 1 && variants[0]?.quantityAvailable) {
@@ -24,7 +24,7 @@ export function VariantSelector({
 	}
 	console.log("Selected Variant:", selectedVariant);
 
-	const selectedSize = selectedVariant?.attributes?.find((attr) => attr.attribute.slug === "size");
+	//const selectedSize = selectedVariant?.attributes?.find((attr) => attr.attribute.slug === "size");
 	const selectedWeight = selectedVariant?.attributes?.find((attr) => attr.attribute.slug === "weight");
 
 	// Check the weight string directly

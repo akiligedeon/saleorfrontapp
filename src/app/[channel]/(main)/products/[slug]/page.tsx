@@ -210,8 +210,8 @@ export default async function Page({
 								variants={variants}
 								product={product}
 								channel={params.channel}
-								price={selectedVariant?.pricing?.price?.gross?.amount}
-								goldPrice={goldPrice}
+								//price={selectedVariant?.pricing?.price?.gross?.amount}
+								goldPrice={goldPrice ?? null}
 							/>
 						)}
 						<AvailabilityMessage isAvailable={isAvailable} />
