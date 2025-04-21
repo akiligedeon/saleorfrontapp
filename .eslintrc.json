@@ -30,7 +30,7 @@
         "@typescript-eslint/no-unsafe-assignment": "off",
 		"@typescript-eslint/no-unsafe-call": "off",
     
-		// allow {} even though it's unsafe but comes handy
+		// allow {} even though it's
 		"@typescript-eslint/ban-types": [
 			"error",
 			{
