@@ -13,7 +13,7 @@ export function NavLink({ href, children }: { href: string; children: JSX.Elemen
 			href={href}
 			className={clsx(
 				isActive ? "border-neutral-900 text-neutral-900" : "border-transparent text-neutral-500",
-				"inline-flex items-center border-b-2 pt-px text-sm font-medium hover:text-neutral-700",
+				"inline-flex items-center border-b-0 p-4 text-sm font-medium hover:text-neutral-700",
 			)}
 		>
 			{children}
