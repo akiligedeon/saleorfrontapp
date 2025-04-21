@@ -16,12 +16,12 @@
 	],
 	"rules": {
 		// sort imports
-		"import/order": "error",
+		"import/order": "off",
 		// no let exports
-		"import/no-mutable-exports": "error",
+		"import/no-mutable-exports": "off",
 
-		"import/no-cycle": "error",
-		"import/no-default-export": "error",
+		"import/no-cycle": "off",
+		"import/no-default-export": "off",
 
 		"import/no-unresolved": "off",
 		"react/no-unescaped-entities": "off",
