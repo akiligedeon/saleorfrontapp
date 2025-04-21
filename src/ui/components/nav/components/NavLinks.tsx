@@ -10,26 +10,26 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 	});
 
 	// Define local links
-	const localLinks = [
-		{ id: "local-1", name: "Size Chart", href: "/size" },
-		{ id: "local-2", name: "About Us", href: "/about" },
-		{ id: "local-3", name: "Care", href: "/care" },
-	];
+	//const localLinks = [
+	//{ id: "local-1", name: "Size Chart", href: "/size" },
+	//{ id: "local-2", name: "About Us", href: "/about" },
+	//{ id: "local-3", name: "Care", href: "/care" },
+	//];
 
 	// Merge dynamic Saleor links with local links
-	const combinedLinks = [...(navLinks.menu?.items || []),...localLinks];
+	const combinedLinks = [...(navLinks.menu?.items || [])];
 
 	return (
 		<>
 			{combinedLinks.map((item) => {
-				if ("href" in item) {
+				/*if ("href" in item) {
 					// Local link case
 					return (
 						<NavLink key={item.id} href={item.href}>
 							{item.name}
 						</NavLink>
 					);
-				}
+				}*/
 
 				// Saleor dynamic links
 				if (item.category) {

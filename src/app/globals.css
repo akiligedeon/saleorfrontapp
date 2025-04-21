@@ -1,15 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap");
+
+.baskervville-regular {
+	font-family: "Baskervville", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.baskervville-regular-italic {
+	font-family: "Baskervville", serif;
+	font-weight: 400;
+	font-style: italic;
+}
 
 html {
-	font-size: 85%; /* Scales the page to 90% of its original size */
+	font-size: 90%; /* Scales the page to 90% of its original size */
 }
 body {
 	overflow-x: hidden;
-	/*background: #f8f3e9 !important;*/
-	background: #EBECF6 !important;
+	/*background: #f8f3e9 !important;
+	background: #ebecf6 !important;*/
+	background: #ffffff !important;
 	zoom: 0;
+	font-family: "Baskervville", serif !important;
+	font-weight: 400;
+	font-style: normal;
 }
 #mobile-menu {
 	background: #f8f3e9;

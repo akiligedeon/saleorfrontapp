@@ -29,7 +29,7 @@ export async function Footer({ channel }: { channel: string }) {
 				<div className="grid grid-cols-4 gap-8 py-16">
 					{footerLinks.menu?.items?.map((item: any) => (
 						<div key={item.id}>
-							<h3 className="mb-4 text-lg font-semibold text-white">{item.name}</h3>
+							<h3 className="mb-4 text-sm font-semibold text-white">{item.name}</h3>
 							<ul className="space-y-2">
 								{item.children?.map((child: any) => {
 									if (child.category) {

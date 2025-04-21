@@ -5,7 +5,7 @@ import { type ResolvingMetadata, type Metadata } from "next";
 import xss from "xss";
 import { invariant } from "ts-invariant";
 import { type WithContext, type Product } from "schema-dts";
-import { AddButton } from "./AddButton";
+import { AddButton, AddButtonOutline } from "./AddButton";
 import { VariantSelector } from "@/ui/components/VariantSelector";
 import { ProductImageWrapper } from "@/ui/atoms/ProductImageWrapper";
 import { executeGraphQL } from "@/lib/graphql";
@@ -13,6 +13,7 @@ import { formatMoney, formatMoneyRange } from "@/lib/utils";
 import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
+import { getGoldPrice } from "@/lib/getGoldPrice";
 
 export async function generateMetadata(
 	{
@@ -128,7 +129,7 @@ export default async function Page({
 	}
 
 	const isAvailable = variants?.some((variant) => variant.quantityAvailable) ?? false;
-
+	const goldPrice = await getGoldPrice();
 	const price = selectedVariant?.pricing?.price?.gross
 		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
 		: isAvailable
@@ -200,12 +201,8 @@ export default async function Page({
 						<h1 className="mb-4 flex-auto text-3xl font-medium tracking-tight text-neutral-900">
 							{product?.name}
 						</h1>
-						<p className="text-md mb-8" data-testid="ProductElement_Price">
-							{price}
-						</p>
-						<p className="mb-8 text-sm" data-testid="ProductElement_Price">
-							Shipping calculated at checkout.
-						</p>
+						
+						
 
 						{variants && (
 							<VariantSelector
@@ -213,12 +210,18 @@ export default async function Page({
 								variants={variants}
 								product={product}
 								channel={params.channel}
+								price={selectedVariant?.pricing?.price?.gross?.amount}
+								goldPrice={goldPrice}
 							/>
 						)}
 						<AvailabilityMessage isAvailable={isAvailable} />
 						<div className="mt-8">
+							<AddButtonOutline disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
+						</div>
+						<div className="mt-2">
 							<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
 						</div>
+
 						{description && (
 							<div className="mt-8 space-y-6 text-sm text-neutral-500">
 								{description.map((content) => (

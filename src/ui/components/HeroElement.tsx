@@ -15,20 +15,25 @@ interface HeroElementProps {
  */
 export function HeroElement({ product, loading, priority }: HeroElementProps) {
 	return (
-		<li  data-testid="ProductElement" className="relative flex flex-col overflow-hidden rounded-md transition">
+		<li
+			data-testid="ProductElement"
+			className="text-dark relative flex flex-col overflow-hidden rounded-md transition"
+		>
 			<LinkWithChannel href={`/products/${product.slug}`} key={product.id}>
-				<div className="relative z-0 flex items-center overflow-hidden">
+				<div className="relative z-0 flex items-center overflow-hidden px-6">
 					<div className="container relative mx-auto flex px-6 py-16">
 						<div className="relative z-0 flex flex-col sm:w-2/3 lg:w-2/5">
 							<span className="mb-12 h-2 w-20 bg-gray-800 dark:bg-black"></span>
-							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-8xl dark:text-black">
+							<h3 className="text-dark text-start text-6xl font-semibold tracking-tight text-black sm:text-6xl">
 								{product.name}
-								<span className="text-2xl sm:text-7xl">
-                                {formatMoneyRange({
-												start: product?.pricing?.priceRange?.start?.gross,
-												stop: product?.pricing?.priceRange?.stop?.gross,
-											})}
-                                </span>
+							</h3>
+							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-3xl dark:text-black">
+								<span className="text-xl sm:text-3xl">
+									{formatMoneyRange({
+										start: product?.pricing?.priceRange?.start?.gross,
+										stop: product?.pricing?.priceRange?.stop?.gross,
+									})}
+								</span>
 							</h1>
 							<p className="text-sm text-gray-700 sm:text-base dark:text-black">
 								Dimension of reality that makes change possible and understandable. An indefinite and
@@ -38,7 +43,7 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 								<a
 									href={`/products/${product.slug}`}
 									key={product.id}
-									className="text-md mr-4 rounded-lg border-2 border-transparent bg-black px-4 py-2 uppercase text-white hover:bg-pink-400"
+									className="text-md hover:bg-grey-400 mr-4 rounded-lg border-2 border-transparent bg-black px-4 py-2 uppercase text-white"
 								>
 									BUY NOW
 								</a>
