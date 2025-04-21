@@ -68,8 +68,8 @@ export function VariantSelector({
 						const isCurrentVariant = selectedVariant?.id === variant.id;
 
 						// Extract specific attributes
-						const color = variant?.attributes?.find((attr) => attr.attribute.slug === "color");
-						const size = variant?.attributes?.find((attr) => attr.attribute.slug === "size");
+						//const color = variant?.attributes?.find((attr) => attr.attribute.slug === "color");
+						//const size = variant?.attributes?.find((attr) => attr.attribute.slug === "size");
 
 						return (
 							<LinkWithChannel

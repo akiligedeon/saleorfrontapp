@@ -19,7 +19,7 @@ export async function generateMetadata(
 	{
 		params,
 		searchParams,
-	}: {
+	}:{
 		params: { slug: string; channel: string };
 		searchParams: { variant?: string };
 	},
