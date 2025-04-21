@@ -24,7 +24,7 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 					<div className="container relative mx-auto flex px-6 py-16">
 						<div className="relative z-0 flex flex-col sm:w-2/3 lg:w-2/5">
 							<span className="mb-12 h-2 w-20 bg-gray-800 dark:bg-black"></span>
-							<h3 className="text-dark text-start text-6xl font-semibold tracking-tight text-black sm:text-6xl">
+							<h3 className="text-dark text-start text-3xl font-semibold tracking-tight text-black sm:text-3xl">
 								{product.name}
 							</h3>
 							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-3xl dark:text-black">

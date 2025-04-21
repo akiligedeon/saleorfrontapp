@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
 
 	return (
 		<section className="mx-auto max-w-7xl p-8 pb-16">
-			<section className="mx-auto max-w-7xl p-8 pb-16">
+			<section className="mx-auto pb-16">
 				<h2 className="sr-only">Product list</h2>
 				<HeroList products={hero_products} />
 			</section>
@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
 					</div>
 				</div>
 			</div>
-			<section className="mx-auto max-w-7xl p-8 pb-16">
+			<section className="mx-auto pb-16">
 				<h2 className="sr-only">Product list</h2>
 				<ProductList products={products} />
 			</section>
