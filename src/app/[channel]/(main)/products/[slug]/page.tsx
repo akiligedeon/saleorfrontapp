@@ -130,14 +130,14 @@ export default async function Page({
 
 	const isAvailable = variants?.some((variant) => variant.quantityAvailable) ?? false;
 	const goldPrice = await getGoldPrice();
-	const price = selectedVariant?.pricing?.price?.gross
+	/*const price = selectedVariant?.pricing?.price?.gross
 		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
 		: isAvailable
 			? formatMoneyRange({
 					start: product?.pricing?.priceRange?.start?.gross,
 					stop: product?.pricing?.priceRange?.stop?.gross,
 				})
-			: "";
+			: "";*/
 
 	const productJsonLd: WithContext<Product> = {
 		"@context": "https://schema.org",
