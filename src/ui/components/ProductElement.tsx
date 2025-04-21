@@ -24,9 +24,9 @@ export function ProductElement({
 							priority={priority}
 						/>
 					)}
-					<div className="mt-2 flex justify-between">
+					<div className="mt-2 flex justify-center">
 						<div>
-							<h3 className="mt-1 text-sm font-semibold text-neutral-900">{product.name}</h3>
+							{/* <h3 className="mt-1 text-sm font-semibold text-neutral-900">{product.name}</h3> */}
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{product.category?.name}
 							</p>
@@ -41,7 +41,7 @@ export function ProductElement({
 									start: product?.pricing?.priceRange?.start?.gross,
 									stop: product?.pricing?.priceRange?.stop?.gross,
 								})}
-							</h1> 
+							</h1>
 						</div>
 					</div>
 				</div>
