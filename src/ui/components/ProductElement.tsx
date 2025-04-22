@@ -33,9 +33,9 @@ export function ProductElement({
 							{/* <p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{JSON.stringify(product)}
 							</p> */}
-							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
+							{/* <p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								Weight : {product?.weight?.value} {product?.weight?.unit}
-							</p>
+							</p> */}
 							{/* <h1 className="font-bolder mt-2" data-testid="ProductElement_PriceRange">
 								{formatMoneyRange({
 									start: product?.pricing?.priceRange?.start?.gross,
