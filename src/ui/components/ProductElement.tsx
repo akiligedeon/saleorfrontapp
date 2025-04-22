@@ -30,6 +30,9 @@ export function ProductElement({
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{product.category?.name}
 							</p>
+							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
+								{JSON.stringify(product)}
+							</p>
 							{/* <h1 className="font-bolder mt-2" data-testid="ProductElement_PriceRange">
 								{formatMoneyRange({
 									start: product?.pricing?.priceRange?.start?.gross,
