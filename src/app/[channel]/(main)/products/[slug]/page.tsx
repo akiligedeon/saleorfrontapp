@@ -187,8 +187,8 @@ export default async function Page({
 							<div key={index} className="overflow-hidden rounded-lg border p-1">
 								<ProductImageWrapperSmall
 									alt={mediaItem.alt ?? `Image ${index + 1}`}
-									width={60}
-									height={60}
+									width={80}
+									height={80}
 									src={mediaItem.url}
 								/>
 							</div>
