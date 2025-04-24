@@ -33836,7 +33836,7 @@ export const MenuGetBySlugDocument = new TypedDocumentString(`
     }
   }
 }
-fragment MenuItem on MenuItem {
+    fragment MenuItem on MenuItem {
   id
   name
   level
@@ -33867,7 +33867,8 @@ export const PageGetBySlugDocument = new TypedDocumentString(`
     seoDescription
     content
   }
-}`) as unknown as TypedDocumentString<PageGetBySlugQuery, PageGetBySlugQueryVariables>;
+}
+    `) as unknown as TypedDocumentString<PageGetBySlugQuery, PageGetBySlugQueryVariables>;
     export const ProductDetailsDocument = new TypedDocumentString(`
       query ProductDetails($slug: String!, $channel: String!) {
         product(slug: $slug, channel: $channel) {
