@@ -56,6 +56,7 @@ export function VariantSelector({
 						<p className="mb-8 text-sm" data-testid="ProductElement_Price">
 							Shipping calculated at checkout.
 						</p>
+						<span className="text-xs text-neutral-600">Weight: {weightString}</span>
 						{/* Cost :{calculatedPrice} - {selectedSize?.values.map((v) => v.name).join(", ")} * {price} ={" "} */}
 						{/* {selectedSize?.values?.map((v) => v.name).join(", ") * price}{" "}
 						{selectedVariant?.pricing?.price?.gross?.currency} */}
@@ -107,11 +108,6 @@ export function VariantSelector({
 								)} */}
 
 								{/* Weight */}
-								{/* {variant.weight && (
-									<span className="text-xs text-neutral-600">
-										Weight: {variant.weight.value} {variant.weight.unit}
-									</span>
-								)} */}
 							</LinkWithChannel>
 						);
 					})}

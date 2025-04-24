@@ -4,16 +4,19 @@ import { notFound } from "next/navigation";
 import { type ResolvingMetadata, type Metadata } from "next";
 import xss from "xss";
 import { invariant } from "ts-invariant";
+
 import { type WithContext, type Product } from "schema-dts";
 import { AddButton, AddButtonOutline } from "./AddButton";
 import { VariantSelector } from "@/ui/components/VariantSelector";
-import { ProductImageWrapper } from "@/ui/atoms/ProductImageWrapper";
-import { executeGraphQL } from "@/lib/graphql";
-//import { formatMoney, formatMoneyRange } from "@/lib/utils";
-import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
-import * as Checkout from "@/lib/checkout";
+import { ProductImageWrapper, ProductImageWrapperSmall } from "@/ui/atoms/ProductImageWrapper";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
+
+import { executeGraphQL } from "@/lib/graphql";
+import * as Checkout from "@/lib/checkout";
 import { getGoldPrice } from "@/lib/getGoldPrice";
+import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
+
+const parser = edjsHTML();
 
 export async function generateMetadata(
 	{
@@ -46,7 +49,7 @@ export async function generateMetadata(
 		description: product.seoDescription || productNameAndVariant,
 		alternates: {
 			canonical: process.env.NEXT_PUBLIC_STOREFRONT_URL
-				? process.env.NEXT_PUBLIC_STOREFRONT_URL + `/products/${encodeURIComponent(params.slug)}`
+				? `${process.env.NEXT_PUBLIC_STOREFRONT_URL}/products/${encodeURIComponent(params.slug)}`
 				: undefined,
 		},
 		openGraph: product.thumbnail
@@ -73,8 +76,6 @@ export async function generateStaticParams({ params }: { params: { channel: stri
 	return paths;
 }
 
-const parser = edjsHTML();
-
 export default async function Page({
 	params,
 	searchParams,
@@ -94,12 +95,13 @@ export default async function Page({
 		notFound();
 	}
 
-	const firstImage = product.thumbnail;
-	const description = product?.description ? parser.parse(JSON.parse(product?.description)) : null;
-
+	const description = product?.description ? parser.parse(JSON.parse(product.description)) : null;
 	const variants = product.variants;
 	const selectedVariantID = searchParams.variant;
 	const selectedVariant = variants?.find(({ id }) => id === selectedVariantID);
+	const isAvailable = variants?.some((v) => v.quantityAvailable) ?? false;
+	const goldPrice = await getGoldPrice();
+	const firstImage = product.thumbnail;
 
 	async function addItem() {
 		"use server";
@@ -112,11 +114,8 @@ export default async function Page({
 
 		Checkout.saveIdToCookie(params.channel, checkout.id);
 
-		if (!selectedVariantID) {
-			return;
-		}
+		if (!selectedVariantID) return;
 
-		// TODO: error handling
 		await executeGraphQL(CheckoutAddLineDocument, {
 			variables: {
 				id: checkout.id,
@@ -127,17 +126,6 @@ export default async function Page({
 
 		revalidatePath("/cart");
 	}
-
-	const isAvailable = variants?.some((variant) => variant.quantityAvailable) ?? false;
-	const goldPrice = await getGoldPrice();
-	/*const price = selectedVariant?.pricing?.price?.gross
-		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
-		: isAvailable
-			? formatMoneyRange({
-					start: product?.pricing?.priceRange?.start?.gross,
-					stop: product?.pricing?.priceRange?.stop?.gross,
-				})
-			: "";*/
 
 	const productJsonLd: WithContext<Product> = {
 		"@context": "https://schema.org",
@@ -158,11 +146,10 @@ export default async function Page({
 				}
 			: {
 					name: product.name,
-
 					description: product.seoDescription || product.name,
 					offers: {
 						"@type": "AggregateOffer",
-						availability: product.variants?.some((variant) => variant.quantityAvailable)
+						availability: product.variants?.some((v) => v.quantityAvailable)
 							? "https://schema.org/InStock"
 							: "https://schema.org/OutOfStock",
 						priceCurrency: product.pricing?.priceRange?.start?.gross.currency,
@@ -186,7 +173,7 @@ export default async function Page({
 						<div className="overflow-hidden rounded-2xl">
 							<div className="transition-transform duration-300 ease-in-out hover:scale-150">
 								<ProductImageWrapper
-									priority={true}
+									priority
 									alt={firstImage.alt ?? ""}
 									width={1024}
 									height={1024}
@@ -195,39 +182,44 @@ export default async function Page({
 							</div>
 						</div>
 					)}
+					<div className="mt-4 grid grid-cols-3 gap-2">
+						{product.media?.map((mediaItem, index) => (
+							<div key={index} className="overflow-hidden rounded-lg border p-1">
+								<ProductImageWrapperSmall
+									alt={mediaItem.alt ?? `Image ${index + 1}`}
+									width={60}
+									height={60}
+									src={mediaItem.url}
+								/>
+							</div>
+						))}
+					</div>
 				</div>
 				<div className="flex flex-col pt-6 sm:col-span-1 sm:px-6 sm:pt-0 lg:col-span-3 lg:pt-16">
-					<div>
-						{/* <h1 className="mb-4 flex-auto text-3xl font-medium tracking-tight text-neutral-900">
-							{product?.name}
-						</h1> */}
-
-						{variants && (
-							<VariantSelector
-								selectedVariant={selectedVariant}
-								variants={variants}
-								product={product}
-								channel={params.channel}
-								//price={selectedVariant?.pricing?.price?.gross?.amount}
-								goldPrice={goldPrice ?? null}
-							/>
-						)}
-						<AvailabilityMessage isAvailable={isAvailable} />
-						<div className="mt-8">
-							<AddButtonOutline disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
-						</div>
-						<div className="mt-2">
-							<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
-						</div>
-
-						{description && (
-							<div className="mt-8 space-y-6 text-sm text-neutral-500">
-								{description.map((content) => (
-									<div key={content} dangerouslySetInnerHTML={{ __html: xss(content) }} />
-								))}
-							</div>
-						)}
+					{variants && (
+						<VariantSelector
+							selectedVariant={selectedVariant}
+							variants={variants}
+							product={product}
+							channel={params.channel}
+							goldPrice={goldPrice ?? null}
+						/>
+					)}
+					<AvailabilityMessage isAvailable={isAvailable} />
+					<div className="mt-8">
+						<AddButtonOutline disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
 					</div>
+					<div className="mt-2">
+						<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
+					</div>
+
+					{description && (
+						<div className="mt-8 space-y-6 text-sm text-neutral-500">
+							{description.map((content) => (
+								<div key={content} dangerouslySetInnerHTML={{ __html: xss(content) }} />
+							))}
+						</div>
+					)}
 				</div>
 			</form>
 		</section>
