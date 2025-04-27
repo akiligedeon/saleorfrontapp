@@ -10,6 +10,16 @@ query ProductDetails($slug: String!, $channel: String!) {
 			url
 			alt
 		}
+		attributes {
+			attribute {
+				name
+				slug
+			}
+			values {
+				name
+				slug
+			}
+		}
 		media {
 			id
 			url
