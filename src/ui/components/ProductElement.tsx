@@ -30,6 +30,9 @@ export function ProductElement({
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{product.category?.name}
 							</p>
+							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
+								{product.weight?.value} g
+							</p>
 							{/* <p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{JSON.stringify(product)}
 							</p> */}

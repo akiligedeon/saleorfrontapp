@@ -27,6 +27,9 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 							<h3 className="text-dark text-start text-3xl font-semibold tracking-tight text-black sm:text-3xl">
 								{product.name}
 							</h3>
+							<h5 className="text-dark text-start text-sm font-semibold tracking-tight text-black sm:text-sm">
+								{product.weight?.value} g
+							</h5>
 							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-3xl dark:text-black">
 								<span className="text-xl sm:text-3xl">
 									{formatMoneyRange({
