@@ -33389,6 +33389,8 @@ export type ProductDetailsQueryVariables = Exact<{
 
 export type ProductDetailsQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoTitle?: string | null, seoDescription?: string | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null, media?: Array<{ __typename?: 'ProductMedia', id: string, url: string, alt: string, type: ProductMediaType, sortOrder?: number | null }> | null, category?: { __typename?: 'Category', id: string, name: string } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, weight?: { __typename?: 'Weight', unit: WeightUnitsEnum, value: number } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', slug?: string | null, name?: string | null }, values: Array<{ __typename?: 'AttributeValue', slug?: string | null, name?: string | null }> }>, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null }> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', amount: number, currency: string } } | null, stop?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', amount: number, currency: string } } | null } | null } | null } | null };
 
+export type ProductDetailsFragmentFragment = { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoTitle?: string | null, seoDescription?: string | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', name?: string | null, slug?: string | null }, values: Array<{ __typename?: 'AttributeValue', name?: string | null, slug?: string | null }> }>, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', amount: number, currency: string } } | null } | null }> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', amount: number, currency: string } } | null, stop?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', amount: number, currency: string } } | null } | null } | null };
+
 export type ProductListQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   channel: Scalars['String']['input'];
@@ -33520,6 +33522,59 @@ export const OrderDetailsFragmentDoc = new TypedDocumentString(`
   paymentStatus
 }
     `, {"fragmentName":"OrderDetails"}) as unknown as TypedDocumentString<OrderDetailsFragment, unknown>;
+export const ProductDetailsFragmentFragmentDoc = new TypedDocumentString(`
+    fragment ProductDetailsFragment on Product {
+  id
+  name
+  slug
+  description
+  seoTitle
+  seoDescription
+  thumbnail {
+    url
+    alt
+  }
+  attributes {
+    attribute {
+      name
+      slug
+    }
+    values {
+      name
+      slug
+    }
+  }
+  variants {
+    id
+    name
+    quantityAvailable
+    pricing {
+      price {
+        gross {
+          amount
+          currency
+        }
+      }
+    }
+  }
+  pricing {
+    priceRange {
+      start {
+        gross {
+          amount
+          currency
+        }
+      }
+      stop {
+        gross {
+          amount
+          currency
+        }
+      }
+    }
+  }
+}
+    `, {"fragmentName":"ProductDetailsFragment"}) as unknown as TypedDocumentString<ProductDetailsFragmentFragment, unknown>;
 export const ProductListItemFragmentDoc = new TypedDocumentString(`
     fragment ProductListItem on Product {
   id
@@ -33896,6 +33951,16 @@ export const ProductDetailsDocument = new TypedDocumentString(`
     thumbnail(size: 1024, format: WEBP) {
       url
       alt
+    }
+    attributes {
+      attribute {
+        name
+        slug
+      }
+      values {
+        name
+        slug
+      }
     }
     media {
       id

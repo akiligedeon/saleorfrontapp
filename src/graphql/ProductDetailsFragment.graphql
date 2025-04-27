@@ -1,0 +1,51 @@
+fragment ProductDetailsFragment on Product {
+	id
+	name
+	slug
+	description
+	seoTitle
+	seoDescription
+	thumbnail {
+		url
+		alt
+	}
+	attributes {
+		attribute {
+			name
+			slug
+		}
+		values {
+			name
+			slug
+		}
+	}
+	variants {
+		id
+		name
+		quantityAvailable
+		pricing {
+			price {
+				gross {
+					amount
+					currency
+				}
+			}
+		}
+	}
+	pricing {
+		priceRange {
+			start {
+				gross {
+					amount
+					currency
+				}
+			}
+			stop {
+				gross {
+					amount
+					currency
+				}
+			}
+		}
+	}
+}

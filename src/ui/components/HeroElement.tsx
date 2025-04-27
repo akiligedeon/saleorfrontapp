@@ -39,6 +39,7 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 								</span>
 							</h1>
 							<p className="text-sm text-gray-700 sm:text-base dark:text-black">
+								{product.name}
 								Dimension of reality that makes change possible and understandable. An indefinite and
 								homogeneous environment in which natural events and human existence take place.
 							</p>
