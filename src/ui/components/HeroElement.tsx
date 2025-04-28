@@ -10,10 +10,27 @@ interface HeroElementProps {
 	description?: boolean;
 }
 
+interface CategoryDescription {
+	blocks: Array<{
+		data: {
+			text: string;
+		};
+	}>;
+}
+
 /**
  * Renders a single product item in the hero section.
  */
 export function HeroElement({ product, loading, priority }: HeroElementProps) {
+	let descriptionText = "";
+
+	try {
+		const parsedData = JSON.parse(product.description ?? "") as CategoryDescription;
+		descriptionText = parsedData.blocks.map((block) => block.data.text).join("\n");
+	} catch (error) {
+		console.error("Error parsing category description:", error);
+		descriptionText = "Description not available.";
+	}
 	return (
 		<li
 			data-testid="ProductElement"
@@ -38,11 +55,7 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 									})}
 								</span>
 							</h1>
-							<p className="text-sm text-gray-700 sm:text-base dark:text-black">
-								{product.name}
-								Dimension of reality that makes change possible and understandable. An indefinite and
-								homogeneous environment in which natural events and human existence take place.
-							</p>
+							<p className="text-sm text-gray-700 sm:text-base dark:text-black">{descriptionText}</p>
 							<div className="mt-8 flex">
 								<a
 									href={`/products/${product.slug}`}

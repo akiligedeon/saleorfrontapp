@@ -9,6 +9,10 @@ export function ProductElement({
 	loading,
 	priority,
 }: { product: ProductListItemFragment } & { loading: "eager" | "lazy"; priority?: boolean }) {
+	const sizeAttribute = product.attributes.find((attr) => attr.attribute.name?.toLowerCase() === "size")
+		?.values[0]?.name;
+	console.log("Size:", sizeAttribute);
+
 	return (
 		<li data-testid="ProductElement">
 			<LinkWithChannel href={`/products/${product.slug}`} key={product.id}>
@@ -30,15 +34,19 @@ export function ProductElement({
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{product.category?.name}
 							</p>
+
 							<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
-								{product.weight?.value} g
+								Size : {sizeAttribute}
 							</p>
+
 							{/* <p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
 								{JSON.stringify(product)}
 							</p> */}
-							{/* <p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
-								Weight : {product?.weight?.value} {product?.weight?.unit}
-							</p> */}
+							{
+								<p className="mt-1 text-sm text-neutral-500" data-testid="ProductElement_Category">
+									Weight : {product?.weight?.value} {product?.weight?.unit}
+								</p>
+							}
 							{/* <h1 className="font-bolder mt-2" data-testid="ProductElement_PriceRange">
 								{formatMoneyRange({
 									start: product?.pricing?.priceRange?.start?.gross,

@@ -19,6 +19,14 @@ export const generateMetadata = async (
 	};
 };
 
+interface CategoryDescription {
+	blocks: Array<{
+		data: {
+			text: string;
+		};
+	}>;
+}
+
 export default async function Page({ params }: { params: { slug: string; channel: string } }) {
 	const { category } = await executeGraphQL(ProductListByCategoryDocument, {
 		variables: { slug: params.slug, channel: params.channel },
@@ -30,10 +38,23 @@ export default async function Page({ params }: { params: { slug: string; channel
 	}
 
 	const { name, products } = category;
+	let descriptionText = "";
 
+	try {
+		const parsedData = JSON.parse(category.description ?? "") as CategoryDescription;
+		descriptionText = parsedData.blocks.map((block) => block.data.text).join("\n");
+	} catch (error) {
+		console.error("Error parsing category description:", error);
+		descriptionText = "Description not available.";
+	}
 	return (
 		<div className="mx-auto max-w-7xl p-8 pb-16">
-			<h1 className="pb-8 text-xl font-semibold">{name}</h1>
+			<div className="mx-auto px-4 sm:container">
+				<div className="border-stroke dark:border-dark-3 border-b">
+					<h2 className="text-dark mb-2 text-2xl font-semibold">{name}</h2>
+					<p className="text-body-color dark:text-dark-6 mb-6 text-sm font-medium">{descriptionText}</p>
+				</div>
+			</div>
 			<ProductList products={products.edges.map((e) => e.node)} />
 		</div>
 	);

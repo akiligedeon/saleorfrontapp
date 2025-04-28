@@ -84,6 +84,13 @@ export async function Footer({ channel }: { channel: string }) {
 					))}
 				</div>
 			</div>
+			{channels?.channels && (
+				<div className="mb-4 text-neutral-500">
+					<label>
+						<span className="text-sm">Change currency:</span> <ChannelSelect channels={channels.channels} />
+					</label>
+				</div>
+			)}
 			<section className="py-6 text-gray-900">
 				<div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
 					<div className="flex flex-col justify-center lg:text-left">

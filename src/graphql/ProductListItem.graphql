@@ -2,6 +2,7 @@ fragment ProductListItem on Product {
 	id
 	name
 	slug
+	description
 	pricing {
 		priceRange {
 			start {
@@ -41,5 +42,18 @@ fragment ProductListItem on Product {
 	weight {
 		unit
 		value
+	}
+	variants {
+		id
+		name
+		quantityAvailable
+		pricing {
+			price {
+				gross {
+					amount
+					currency
+				}
+			}
+		}
 	}
 }

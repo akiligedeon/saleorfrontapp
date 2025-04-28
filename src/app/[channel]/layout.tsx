@@ -14,6 +14,7 @@ export const generateStaticParams = async () => {
 				Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
 			},
 		});
+
 		return (
 			channels.channels
 				?.filter((channel) => channel.isActive)
