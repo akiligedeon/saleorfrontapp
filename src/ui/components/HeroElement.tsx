@@ -31,6 +31,11 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 		console.error("Error parsing category description:", error);
 		descriptionText = "Description not available.";
 	}
+
+	const sizeAttribute = product.attributes.find((attr) => attr.attribute.name?.toLowerCase() === "size")
+		?.values[0]?.name;
+
+	console.log("Size:", JSON.stringify(sizeAttribute));
 	return (
 		<li
 			data-testid="ProductElement"
@@ -44,8 +49,16 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 							<h3 className="text-dark text-start text-3xl font-semibold tracking-tight text-black sm:text-3xl">
 								{product.name}
 							</h3>
-							<h5 className="text-dark text-start text-sm font-semibold tracking-tight text-black sm:text-sm">
-								{product.weight?.value} g
+
+							<h5 className="text-dark py-6 text-start text-sm font-semibold tracking-tight text-black sm:text-sm">
+								<div className="flex gap-2">
+									<span className="inline-block rounded-full bg-black px-3 py-1 text-sm font-semibold text-gray-200">
+										Weight : {product.weight?.value} g
+									</span>
+									<span className="text-black-800 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold">
+										Size: {sizeAttribute ?? "0"}
+									</span>
+								</div>
 							</h5>
 							<h1 className="font-bebas-neue flex flex-col text-7xl font-black uppercase leading-none text-gray-800 sm:text-3xl dark:text-black">
 								<span className="text-xl sm:text-3xl">
@@ -60,7 +73,7 @@ export function HeroElement({ product, loading, priority }: HeroElementProps) {
 								<a
 									href={`/products/${product.slug}`}
 									key={product.id}
-									className="text-md hover:bg-grey-400 mr-4 rounded-lg border-2 border-transparent bg-black px-4 py-2 uppercase text-white"
+									className="text-md hover:bg-grey-400 mr-4 rounded-full border-2 border-transparent bg-black px-4 py-1 uppercase text-white"
 								>
 									BUY NOW
 								</a>
