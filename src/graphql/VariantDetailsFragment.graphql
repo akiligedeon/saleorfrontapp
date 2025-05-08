@@ -1,27 +1,37 @@
 fragment VariantDetails on ProductVariant {
-  id
-  name
-  quantityAvailable
-  weight {
-    unit
-    value
-  }
-  attributes {
-    attribute {
-      slug
-      name
-    }
-    values {
-      slug
-      name
-    }
-  }
-  pricing {
-    price {
-      gross {
-        currency
-        amount
-      }
-    }
-  }
+	id
+	name
+	quantityAvailable
+	channelListings {
+		channel {
+			id
+			slug
+		}
+		price {
+			amount
+			currency
+		}
+	}
+	weight {
+		unit
+		value
+	}
+	attributes {
+		attribute {
+			slug
+			name
+		}
+		values {
+			slug
+			name
+		}
+	}
+	pricing {
+		price {
+			gross {
+				currency
+				amount
+			}
+		}
+	}
 }

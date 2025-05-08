@@ -13,6 +13,7 @@ import * as types from './graphql';
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
+
 const documents = {
     "query ChannelsList {\n  channels {\n    id\n    name\n    slug\n    isActive\n    currencyCode\n    countries {\n      country\n      code\n    }\n  }\n}": types.ChannelsListDocument,
     "mutation CheckoutAddLine($id: ID!, $productVariantId: ID!) {\n  checkoutLinesAdd(id: $id, lines: [{quantity: 1, variantId: $productVariantId}]) {\n    checkout {\n      id\n      lines {\n        id\n        quantity\n        variant {\n          name\n          product {\n            name\n          }\n        }\n      }\n    }\n    errors {\n      message\n    }\n  }\n}": types.CheckoutAddLineDocument,
@@ -31,9 +32,10 @@ const documents = {
     "query ProductListByCollection($slug: String!, $channel: String!) {\n  collection(slug: $slug, channel: $channel) {\n    name\n    description\n    seoDescription\n    seoTitle\n    products(first: 100) {\n      edges {\n        node {\n          ...ProductListItem\n        }\n      }\n    }\n  }\n}": types.ProductListByCollectionDocument,
     "fragment ProductListItem on Product {\n  id\n  name\n  slug\n  description\n  pricing {\n    priceRange {\n      start {\n        gross {\n          amount\n          currency\n        }\n      }\n      stop {\n        gross {\n          amount\n          currency\n        }\n      }\n    }\n  }\n  category {\n    id\n    name\n  }\n  thumbnail(size: 1024, format: WEBP) {\n    url\n    alt\n  }\n  attributes {\n    attribute {\n      id\n      name\n      slug\n    }\n    values {\n      id\n      name\n      slug\n    }\n  }\n  weight {\n    unit\n    value\n  }\n  variants {\n    id\n    name\n    quantityAvailable\n    pricing {\n      price {\n        gross {\n          amount\n          currency\n        }\n      }\n    }\n  }\n}": types.ProductListItemFragmentDoc,
     "query ProductListPaginated($first: Int!, $after: String, $channel: String!) {\n  products(first: $first, after: $after, channel: $channel) {\n    totalCount\n    edges {\n      node {\n        ...ProductListItem\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}": types.ProductListPaginatedDocument,
+    "mutation ProductVariantChannelListingUpdate($id: ID!, $input: [ProductVariantChannelListingAddInput!]!) {\n  productVariantChannelListingUpdate(id: $id, input: $input) {\n    variant {\n      id\n      name\n      channelListings {\n        channel {\n          id\n          slug\n        }\n        price {\n          amount\n          currency\n        }\n      }\n    }\n    errors {\n      field\n      message\n      code\n    }\n  }\n}": types.ProductVariantChannelListingUpdateDocument,
     "query SearchProducts($search: String!, $sortBy: ProductOrderField!, $sortDirection: OrderDirection!, $first: Int!, $after: String, $channel: String!) {\n  products(\n    first: $first\n    after: $after\n    channel: $channel\n    sortBy: {field: $sortBy, direction: $sortDirection}\n    filter: {search: $search}\n  ) {\n    totalCount\n    edges {\n      node {\n        ...ProductListItem\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}": types.SearchProductsDocument,
     "fragment UserDetails on User {\n  id\n  email\n  firstName\n  lastName\n  avatar {\n    url\n    alt\n  }\n}": types.UserDetailsFragmentDoc,
-    "fragment VariantDetails on ProductVariant {\n  id\n  name\n  quantityAvailable\n  weight {\n    unit\n    value\n  }\n  attributes {\n    attribute {\n      slug\n      name\n    }\n    values {\n      slug\n      name\n    }\n  }\n  pricing {\n    price {\n      gross {\n        currency\n        amount\n      }\n    }\n  }\n}": types.VariantDetailsFragmentDoc,
+    "fragment VariantDetails on ProductVariant {\n  id\n  name\n  quantityAvailable\n  channelListings {\n    channel {\n      id\n      slug\n    }\n    price {\n      amount\n      currency\n    }\n  }\n  weight {\n    unit\n    value\n  }\n  attributes {\n    attribute {\n      slug\n      name\n    }\n    values {\n      slug\n      name\n    }\n  }\n  pricing {\n    price {\n      gross {\n        currency\n        amount\n      }\n    }\n  }\n}": types.VariantDetailsFragmentDoc,
 };
 
 /**
@@ -107,6 +109,10 @@ export function graphql(source: "query ProductListPaginated($first: Int!, $after
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation ProductVariantChannelListingUpdate($id: ID!, $input: [ProductVariantChannelListingAddInput!]!) {\n  productVariantChannelListingUpdate(id: $id, input: $input) {\n    variant {\n      id\n      name\n      channelListings {\n        channel {\n          id\n          slug\n        }\n        price {\n          amount\n          currency\n        }\n      }\n    }\n    errors {\n      field\n      message\n      code\n    }\n  }\n}"): typeof import('./graphql').ProductVariantChannelListingUpdateDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query SearchProducts($search: String!, $sortBy: ProductOrderField!, $sortDirection: OrderDirection!, $first: Int!, $after: String, $channel: String!) {\n  products(\n    first: $first\n    after: $after\n    channel: $channel\n    sortBy: {field: $sortBy, direction: $sortDirection}\n    filter: {search: $search}\n  ) {\n    totalCount\n    edges {\n      node {\n        ...ProductListItem\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}"): typeof import('./graphql').SearchProductsDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -115,7 +121,7 @@ export function graphql(source: "fragment UserDetails on User {\n  id\n  email\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment VariantDetails on ProductVariant {\n  id\n  name\n  quantityAvailable\n  weight {\n    unit\n    value\n  }\n  attributes {\n    attribute {\n      slug\n      name\n    }\n    values {\n      slug\n      name\n    }\n  }\n  pricing {\n    price {\n      gross {\n        currency\n        amount\n      }\n    }\n  }\n}"): typeof import('./graphql').VariantDetailsFragmentDoc;
+export function graphql(source: "fragment VariantDetails on ProductVariant {\n  id\n  name\n  quantityAvailable\n  channelListings {\n    channel {\n      id\n      slug\n    }\n    price {\n      amount\n      currency\n    }\n  }\n  weight {\n    unit\n    value\n  }\n  attributes {\n    attribute {\n      slug\n      name\n    }\n    values {\n      slug\n      name\n    }\n  }\n  pricing {\n    price {\n      gross {\n        currency\n        amount\n      }\n    }\n  }\n}"): typeof import('./graphql').VariantDetailsFragmentDoc;
 
 
 export function graphql(source: string) {

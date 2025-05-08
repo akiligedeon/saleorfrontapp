@@ -14,7 +14,12 @@ import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
 import { executeGraphQL } from "@/lib/graphql";
 import * as Checkout from "@/lib/checkout";
 import { getGoldPrice } from "@/lib/getGoldPrice";
-import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
+import {
+	CheckoutAddLineDocument,
+	ProductDetailsDocument,
+	ProductListDocument,
+	ProductVariantChannelListingUpdateDocument,
+} from "@/gql/graphql";
 
 const parser = edjsHTML();
 
@@ -103,6 +108,8 @@ export default async function Page({
 	const goldPrice = await getGoldPrice();
 	const firstImage = product.thumbnail;
 
+	console.log("GOLD PRICE :" + goldPrice);
+
 	async function addItem() {
 		"use server";
 
@@ -110,12 +117,33 @@ export default async function Page({
 			checkoutId: Checkout.getIdFromCookies(params.channel),
 			channel: params.channel,
 		});
+
 		invariant(checkout, "This should never happen");
 
 		Checkout.saveIdToCookie(params.channel, checkout.id);
 
-		if (!selectedVariantID) return;
+		if (!selectedVariantID || !selectedVariant) return;
 
+		// ✅ Update price via ProductVariantChannelListingUpdate
+		const channelListing = selectedVariant.channelListings?.find(
+			(cl: { channel: { slug: string } }) => cl.channel.slug === params.channel,
+		);
+
+		if (channelListing) {
+			await executeGraphQL(ProductVariantChannelListingUpdateDocument, {
+				variables: {
+					id: selectedVariant.id,
+					input: [
+						{
+							channelId: channelListing.channel.id,
+							price: goldPrice ?? 1, // convert to string if required
+						},
+					],
+				},
+			});
+		}
+
+		// ✅ Add to cart
 		await executeGraphQL(CheckoutAddLineDocument, {
 			variables: {
 				id: checkout.id,

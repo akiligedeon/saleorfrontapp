@@ -21,7 +21,7 @@ export function VariantSelector({
 		redirect("/" + channel + getHrefForVariant({ productSlug: product.slug, variantId: variants[0].id }));
 	}
 
-	const currentVariant = selectedVariant || variants[0]; // 👉 fallback to first variant
+	const currentVariant = selectedVariant || variants[0]; // i fall back to fisrt variant
 	if (!currentVariant) return null; // safeguard
 
 	const selectedWeight = currentVariant.attributes?.find((attr) => attr.attribute.slug === "weight");
