@@ -2,11 +2,11 @@
 import { ProductListByCollectionDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 import { ProductList } from "@/ui/components/ProductList";
-import { HeroList } from "@/ui/components/HeroList";
+//import { HeroList } from "@/ui/components/HeroList";
 
 import dynamic from 'next/dynamic';
 
-const HeaderFour = dynamic(() => import('@/ui/layout/headers/header-4'), { ssr: false });
+//const HeaderFour = dynamic(() => import('@/ui/layout/headers/header-4'), { ssr: false });
 const JewelryBanner = dynamic(() => import('@/ui/components/banner/jewelry-banner'), { ssr: false });
 const JewelryShopBanner = dynamic(() => import('@/ui/components/shop-banner/jewelry-shop-banner'), { ssr: false });
 const JewelryAbout = dynamic(() => import('@/ui/components/about/jewelry-about'), { ssr: false });
