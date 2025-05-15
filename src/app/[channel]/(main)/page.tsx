@@ -1,7 +1,18 @@
+
 import { ProductListByCollectionDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 import { ProductList } from "@/ui/components/ProductList";
 import { HeroList } from "@/ui/components/HeroList";
+
+import dynamic from 'next/dynamic';
+
+const HeaderFour = dynamic(() => import('@/ui/layout/headers/header-4'), { ssr: false });
+const JewelryBanner = dynamic(() => import('@/ui/components/banner/jewelry-banner'), { ssr: false });
+const JewelryShopBanner = dynamic(() => import('@/ui/components/shop-banner/jewelry-shop-banner'), { ssr: false });
+const JewelryAbout = dynamic(() => import('@/ui/components/about/jewelry-about'), { ssr: false });
+const FeatureAreaThree = dynamic(() => import('@/ui/components/features/feature-area-3'), { ssr: false });
+
+
 
 export const metadata = {
 	title: "Luxury Jewelry Store | Timeless Elegance & Craftsmanship",
@@ -34,14 +45,21 @@ export default async function Page({ params }: { params: { channel: string } }) 
 	}
 
 	const products = data.collection?.products.edges.map(({ node: product }) => product);
-	const hero_products = data2.collection?.products.edges.map(({ node: product }) => product);
+	//const hero_products = data2.collection?.products.edges.map(({ node: product }) => product);
 
 	return (
-		<section className="mx-auto max-w-7xl p-8 pb-16">
-			<section className="mx-auto pb-16">
+    
+		<section className="mx-auto p-0 pb-16">
+			
+			{/*<section className="mx-auto pb-16">
 				<h2 className="sr-only">Product list</h2>
 				<HeroList products={hero_products} />
 			</section>
+			<HeaderFour/>*/}
+			<JewelryBanner/>
+			<FeatureAreaThree />
+			<JewelryShopBanner/>
+			<JewelryAbout/>
 			<div className="border-b">
 				<div className="px-6 py-8 sm:px-6 sm:py-20">
 					<div className="mx-auto max-w-2xl text-center">

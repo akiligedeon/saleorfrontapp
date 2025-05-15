@@ -14,10 +14,10 @@ export async function Footer({ channel }: { channel: string }) {
 	});
 	const channels = process.env.SALEOR_APP_TOKEN
 		? await executeGraphQL(ChannelsListDocument, {
-				withAuth: true, // disable cookie-based auth for this call
+				withAuth: false, // disable cookie-based auth for this call
 				headers: {
 					// and use app token instead
-					// Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
+					 Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
 				},
 			})
 		: null;
@@ -84,13 +84,7 @@ export async function Footer({ channel }: { channel: string }) {
 					))}
 				</div>
 			</div>
-			{channels?.channels && (
-				<div className="mb-4 text-neutral-500">
-					<label>
-						<span className="text-sm">Change currency:</span> <ChannelSelect channels={channels.channels} />
-					</label>
-				</div>
-			)}
+			
 			<section className="py-6 text-gray-900">
 				<div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
 					<div className="flex flex-col justify-center lg:text-left">
@@ -150,13 +144,7 @@ export async function Footer({ channel }: { channel: string }) {
 			<div className="mb-8 mt-8 border-t border-gray-700 pt-6 text-center">
 				<p className="text-sm text-gray-400">Copyright &copy; {currentYear} Gltz.</p>
 				<p className="text-sm text-gray-400">Powered by Seijelli LLC</p>
-				{channels?.channels && (
-					<div className="mb-4 text-white">
-						<label>
-							<span className="text-sm">Change currency:</span> <ChannelSelect channels={channels.channels} />
-						</label>
-					</div>
-				)}
+				
 			</div>
 		</footer>
 		/*

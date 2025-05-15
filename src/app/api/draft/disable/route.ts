@@ -7,6 +7,7 @@ export async function GET() {
 		headers: {
 			"content-type": "text/plain",
 			refresh: "1; url=/",
+			Authorization: `Bearer ${process.env.SALEOR_APP_TOKEN}`,
 		},
 	});
 }

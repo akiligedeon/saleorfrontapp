@@ -13,7 +13,6 @@ import * as types from './graphql';
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
-
 const documents = {
     "query ChannelsList {\n  channels {\n    id\n    name\n    slug\n    isActive\n    currencyCode\n    countries {\n      country\n      code\n    }\n  }\n}": types.ChannelsListDocument,
     "mutation CheckoutAddLine($id: ID!, $productVariantId: ID!) {\n  checkoutLinesAdd(id: $id, lines: [{quantity: 1, variantId: $productVariantId}]) {\n    checkout {\n      id\n      lines {\n        id\n        quantity\n        variant {\n          name\n          product {\n            name\n          }\n        }\n      }\n    }\n    errors {\n      message\n    }\n  }\n}": types.CheckoutAddLineDocument,
